@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { CalendarDays } from 'lucide-react';
 import type { Recipe, Meal } from '@/types/recipe';
 import { showMessage } from './Toast';
 
@@ -123,7 +124,7 @@ export default function MealPlanTab({ recipes, meals, onAddMeal, onDeleteMeal, o
           <div className="max-h-[550px] overflow-y-auto">
             {sortedMeals.length === 0 ? (
               <div className="text-center py-9 text-text-tertiary">
-                <div className="text-3xl mb-2 opacity-50">📅</div>
+                <CalendarDays className="w-8 h-8 text-muted-foreground/50 mx-auto mb-2" />
                 <p className="text-sm font-semibold">No meals planned yet</p>
               </div>
             ) : (

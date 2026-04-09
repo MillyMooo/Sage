@@ -1,3 +1,4 @@
+import { Calendar } from 'lucide-react';
 import type { Meal } from '@/types/recipe';
 
 interface Props {
@@ -16,7 +17,7 @@ export default function CalendarTab({ meals, onToggleComplete }: Props) {
           <p className="text-sm text-text-tertiary mt-1 font-medium">At-a-glance view of your week</p>
         </div>
         <div className="text-center py-14 text-text-tertiary">
-          <div className="text-4xl mb-2 opacity-50">📆</div>
+          <Calendar className="w-10 h-10 text-muted-foreground/50 mx-auto mb-2" />
           <p className="text-sm font-semibold">No meals scheduled</p>
         </div>
       </div>
