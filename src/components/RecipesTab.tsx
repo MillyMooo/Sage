@@ -12,7 +12,8 @@ interface Props {
   personNames: string[];
 }
 
-export default function RecipesTab({ recipes, onAddRecipe, onDeleteRecipe, personNames }: Props) {
+export default function RecipesTab({ recipes, onAddRecipe, onUpdateRecipe, onDeleteRecipe, personNames }: Props) {
+  const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
   const [parseText, setParseText] = useState('');
   const [name, setName] = useState('');
   const [person, setPerson] = useState('');
