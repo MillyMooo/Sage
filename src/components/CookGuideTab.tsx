@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { MousePointerClick } from 'lucide-react';
 import type { Meal, Recipe } from '@/types/recipe';
 
 interface Props {
@@ -82,7 +83,7 @@ export default function CookGuideTab({ meals, recipes }: Props) {
 
       {!batchFilter ? (
         <div className="text-center py-14 text-text-tertiary">
-          <div className="text-4xl mb-2 opacity-50">👆</div>
+          <MousePointerClick className="w-10 h-10 text-muted-foreground/50 mx-auto mb-2" />
           <p className="text-sm font-semibold">Select a batch week above</p>
         </div>
       ) : batchRecipes.length === 0 ? (

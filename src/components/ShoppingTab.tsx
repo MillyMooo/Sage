@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { ShoppingCart } from 'lucide-react';
 import type { Meal, Recipe } from '@/types/recipe';
 
 interface Props {
@@ -73,7 +74,7 @@ export default function ShoppingTab({ meals, recipes }: Props) {
 
       {Object.keys(categorized).length === 0 ? (
         <div className="text-center py-14 text-text-tertiary">
-          <div className="text-4xl mb-2 opacity-50">🛒</div>
+          <ShoppingCart className="w-10 h-10 text-muted-foreground/50 mx-auto mb-2" />
           <p className="text-sm font-semibold">No meals for this batch</p>
         </div>
       ) : (
