@@ -203,33 +203,32 @@ export default function RecipesTab({ recipes, onAddRecipe, onUpdateRecipe, onDel
           <span className="inline-block text-[0.65rem] font-extrabold uppercase tracking-widest text-green-mid bg-primary/10 px-2.5 py-1 rounded-pill mb-3">Your Recipes</span>
           <div className="flex flex-col gap-3">
             {recipes.map(r => (
-              <div key={r.id} className="bg-card border border-border rounded-lg p-5 transition-all hover:border-green-soft hover:shadow-card hover:-translate-y-0.5">
+              <div key={r.id} onClick={() => setSelectedRecipe(r)} className="bg-card border border-border rounded-lg p-5 transition-all hover:border-green-soft hover:shadow-card hover:-translate-y-0.5 cursor-pointer">
                 <div className="font-bold text-[0.95rem] text-primary mb-2">{r.name}</div>
                 <div className="flex flex-wrap gap-1.5">
                   <span className="inline-flex items-center px-2.5 py-1 rounded-pill text-xs font-bold bg-sage text-primary">{r.person}</span>
                   <span className="inline-flex items-center px-2.5 py-1 rounded-pill text-xs font-bold bg-sage text-primary">{r.mealType}</span>
                   {r.calories && <span className="inline-flex items-center px-2.5 py-1 rounded-pill text-xs font-bold bg-blush text-blush-deep">{r.calories} cal</span>}
                   {r.protein && <span className="inline-flex items-center px-2.5 py-1 rounded-pill text-xs font-bold bg-blush text-blush-deep">{r.protein}g protein</span>}
-                  {r.carbs && <span className="inline-flex items-center px-2.5 py-1 rounded-pill text-xs font-bold bg-blush text-blush-deep">{r.carbs}g carbs</span>}
-                  {r.fat && <span className="inline-flex items-center px-2.5 py-1 rounded-pill text-xs font-bold bg-blush text-blush-deep">{r.fat}g fat</span>}
-                  {r.fiber && <span className="inline-flex items-center px-2.5 py-1 rounded-pill text-xs font-bold bg-blush text-blush-deep">{r.fiber}g fiber</span>}
                   {r.prepTime && <span className="inline-flex items-center px-2.5 py-1 rounded-pill text-xs font-bold bg-sage text-primary">{r.prepTime} min</span>}
                 </div>
-                {r.notes && <div className="text-sm text-muted-foreground font-medium mt-2.5"><strong>Notes:</strong> {r.notes}</div>}
-                <div className="flex items-center justify-between mt-3">
+                <div className="mt-3">
                   <span className="text-xs text-text-tertiary font-semibold">{r.ingredients.length} ingredients · {r.instructions.length} steps</span>
-                  <button
-                    onClick={() => { if (confirm('Delete this recipe?')) onDeleteRecipe(r.id); }}
-                    className="inline-flex items-center px-3.5 py-1.5 rounded-pill text-xs font-bold bg-accent/30 text-blush-deep border border-blush-deep/20 hover:bg-accent/50 transition-all active:scale-[0.97]"
-                  >
-                    Delete
-                  </button>
                 </div>
               </div>
             ))}
           </div>
         </div>
       )}
+
+      <RecipeDetailDialog
+        recipe={selectedRecipe}
+        open={!!selectedRecipe}
+        onClose={() => setSelectedRecipe(null)}
+        onUpdate={(updated) => { onUpdateRecipe(updated); setSelectedRecipe(updated); }}
+        onDelete={onDeleteRecipe}
+        personNames={personNames}
+      />
     </div>
   );
 }
