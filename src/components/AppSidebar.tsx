@@ -1,5 +1,6 @@
 import { BookOpen, Calendar, CalendarDays, ShoppingCart, ChefHat } from 'lucide-react';
 import type { TabName } from '@/types/recipe';
+import sageLogo from '/sage-logo.png';
 
 const navItems: { tab: TabName; label: string; icon: React.ElementType }[] = [
   { tab: 'recipes', label: 'Recipes', icon: BookOpen },
@@ -20,9 +21,12 @@ export default function AppSidebar({ activeTab, onTabChange, onExport }: Props) 
     <>
       {/* Desktop Sidebar */}
       <aside className="hidden md:flex fixed left-0 top-0 bottom-0 w-[230px] bg-sage-soft border-r border-border flex-col py-7 z-50">
-        <div className="px-6 pb-7 border-b border-border mb-2">
-          <h1 className="font-display font-semibold text-2xl text-primary">Meal Prep</h1>
-          <span className="text-[0.7rem] text-text-tertiary font-semibold tracking-widest uppercase mt-1 block">Planner</span>
+        <div className="px-6 pb-7 border-b border-border mb-2 flex items-center gap-3">
+          <img src={sageLogo} alt="Sage logo" width={32} height={32} className="shrink-0" />
+          <div>
+            <h1 className="font-display font-semibold text-2xl text-primary leading-none">Sage</h1>
+            <span className="text-[0.7rem] text-text-tertiary font-semibold tracking-widest uppercase mt-0.5 block">Meal Prep</span>
+          </div>
         </div>
         <nav className="flex-1 px-3 flex flex-col gap-0.5 py-2">
           {navItems.map(({ tab, label, icon: Icon }) => (
