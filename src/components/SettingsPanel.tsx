@@ -48,10 +48,10 @@ export default function SettingsPanel({ names, onUpdateNames }: Props) {
       </div>
       <div className="flex flex-col gap-2 mb-2">
         {editNames.map((name, i) => (
-          <div key={i} className="flex gap-1.5">
-            <input value={name} onChange={e => updateName(i, e.target.value)} placeholder={`Person ${i + 1}`} className="flex-1 p-2 bg-input border border-border rounded-md text-sm font-medium focus:outline-none focus:border-green-soft" />
+          <div key={i} className="flex gap-1.5 min-w-0">
+            <input value={name} onChange={e => updateName(i, e.target.value)} placeholder={`Person ${i + 1}`} className="min-w-0 flex-1 p-2 bg-input border border-border rounded-md text-sm font-medium focus:outline-none focus:border-green-soft" />
             {editNames.length > 1 && (
-              <button onClick={() => removeName(i)} className="p-2 text-muted-foreground hover:text-destructive transition-colors"><Trash2 size={14} /></button>
+              <button onClick={() => removeName(i)} className="shrink-0 p-2 text-muted-foreground hover:text-destructive transition-colors"><Trash2 size={14} /></button>
             )}
           </div>
         ))}
