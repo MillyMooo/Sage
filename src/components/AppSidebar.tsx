@@ -1,6 +1,7 @@
 import { BookOpen, Calendar, CalendarDays, ShoppingCart, ChefHat } from 'lucide-react';
 import type { TabName } from '@/types/recipe';
 import sageLogo from '/sage-logo.png';
+import SettingsPanel from './SettingsPanel';
 
 const navItems: { tab: TabName; label: string; icon: React.ElementType }[] = [
   { tab: 'recipes', label: 'Recipes', icon: BookOpen },
@@ -14,9 +15,11 @@ interface Props {
   activeTab: TabName;
   onTabChange: (tab: TabName) => void;
   onExport: () => void;
+  names: string[];
+  onUpdateNames: (names: string[]) => void;
 }
 
-export default function AppSidebar({ activeTab, onTabChange, onExport }: Props) {
+export default function AppSidebar({ activeTab, onTabChange, onExport, names, onUpdateNames }: Props) {
   return (
     <>
       {/* Desktop Sidebar */}
@@ -44,13 +47,14 @@ export default function AppSidebar({ activeTab, onTabChange, onExport }: Props) 
             </button>
           ))}
         </nav>
-        <div className="px-3 pt-3 border-t border-border mx-3">
+        <div className="px-3 pt-3 border-t border-border mx-3 flex flex-col gap-2">
           <button
             onClick={onExport}
             className="w-full py-2.5 bg-primary/10 border border-border rounded-sm text-primary text-xs font-bold hover:bg-primary/15 transition-all"
           >
             Export Data
           </button>
+          <SettingsPanel names={names} onUpdateNames={onUpdateNames} />
         </div>
       </aside>
 
