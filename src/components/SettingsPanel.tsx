@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Settings, X } from 'lucide-react';
+import { Settings, X, Plus, Trash2 } from 'lucide-react';
 
 interface Props {
   names: string[];
@@ -8,20 +8,31 @@ interface Props {
 
 export default function SettingsPanel({ names, onUpdateNames }: Props) {
   const [open, setOpen] = useState(false);
-  const [name1, setName1] = useState(names[0]);
-  const [name2, setName2] = useState(names[1]);
+  const [editNames, setEditNames] = useState<string[]>(names);
 
   function handleSave() {
-    const n1 = name1.trim() || 'Person 1';
-    const n2 = name2.trim() || 'Person 2';
-    onUpdateNames([n1, n2]);
+    const cleaned = editNames.map(n => n.trim()).filter(Boolean);
+    onUpdateNames(cleaned.length ? cleaned : ['Person 1']);
     setOpen(false);
+  }
+
+  function updateName(index: number, value: string) {
+    setEditNames(prev => prev.map((n, i) => i === index ? value : n));
+  }
+
+  function addName() {
+    setEditNames(prev => [...prev, '']);
+  }
+
+  function removeName(index: number) {
+    if (editNames.length <= 1) return;
+    setEditNames(prev => prev.filter((_, i) => i !== index));
   }
 
   if (!open) {
     return (
       <button
-        onClick={() => { setName1(names[0]); setName2(names[1]); setOpen(true); }}
+        onClick={() => { setEditNames([...names]); setOpen(true); }}
         className="w-full py-2.5 bg-primary/10 border border-border rounded-sm text-primary text-xs font-bold hover:bg-primary/15 transition-all flex items-center justify-center gap-1.5"
       >
         <Settings size={14} /> Settings
@@ -35,8 +46,19 @@ export default function SettingsPanel({ names, onUpdateNames }: Props) {
         <span className="text-xs font-bold text-primary">Person Names</span>
         <button onClick={() => setOpen(false)} className="text-muted-foreground hover:text-primary"><X size={14} /></button>
       </div>
-      <input value={name1} onChange={e => setName1(e.target.value)} placeholder="Person 1" className="w-full p-2 bg-input border border-border rounded-md text-sm font-medium mb-2 focus:outline-none focus:border-green-soft" />
-      <input value={name2} onChange={e => setName2(e.target.value)} placeholder="Person 2" className="w-full p-2 bg-input border border-border rounded-md text-sm font-medium mb-3 focus:outline-none focus:border-green-soft" />
+      <div className="flex flex-col gap-2 mb-2">
+        {editNames.map((name, i) => (
+          <div key={i} className="flex gap-1.5">
+            <input value={name} onChange={e => updateName(i, e.target.value)} placeholder={`Person ${i + 1}`} className="flex-1 p-2 bg-input border border-border rounded-md text-sm font-medium focus:outline-none focus:border-green-soft" />
+            {editNames.length > 1 && (
+              <button onClick={() => removeName(i)} className="p-2 text-muted-foreground hover:text-destructive transition-colors"><Trash2 size={14} /></button>
+            )}
+          </div>
+        ))}
+      </div>
+      <button onClick={addName} className="w-full py-1.5 border border-dashed border-border rounded-md text-xs font-bold text-muted-foreground hover:text-primary hover:border-primary/30 transition-all flex items-center justify-center gap-1 mb-3">
+        <Plus size={12} /> Add Person
+      </button>
       <button onClick={handleSave} className="w-full py-2 bg-primary text-primary-foreground rounded-md text-xs font-bold hover:opacity-90 transition-all">Save Names</button>
     </div>
   );

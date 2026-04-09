@@ -121,9 +121,8 @@ export default function RecipesTab({ recipes, onAddRecipe, onDeleteRecipe, perso
             <label className="block text-xs font-bold text-muted-foreground mb-1">For</label>
             <select value={person} onChange={e => setPerson(e.target.value)} className="w-full p-2.5 bg-input border border-border rounded-md text-sm font-medium text-foreground focus:outline-none focus:border-green-soft min-h-[44px] appearance-none">
               <option value="">Select person</option>
-              <option value={personNames[0]}>{personNames[0]}</option>
-              <option value={personNames[1]}>{personNames[1]}</option>
-              <option value="Both">Both</option>
+              {personNames.map(n => <option key={n} value={n}>{n}</option>)}
+              <option value="All">All</option>
             </select>
           </div>
         </div>
