@@ -58,7 +58,7 @@ export default function MealPlanTab({ recipes, meals, onAddMeal, onDeleteMeal, o
 
           <div className="mb-3">
             <label className="block text-xs font-bold text-muted-foreground mb-1">Batch Cook Week *</label>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label className="text-[0.68rem] text-text-tertiary">Start</label>
                 <input type="date" value={batchStart} onChange={e => setBatchStart(e.target.value)} className="w-full p-2.5 bg-input border border-border rounded-md text-sm font-medium min-h-[44px] focus:outline-none focus:border-green-soft" />
