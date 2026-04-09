@@ -91,7 +91,7 @@ export default function RecipesTab({ recipes, onAddRecipe, onUpdateRecipe, onDel
           onDragLeave={() => setDragOver(false)}
           onDrop={e => { e.preventDefault(); setDragOver(false); const t = e.dataTransfer.getData('text/plain'); if (t) setParseText(t); }}
         >
-          <div className="text-2xl mb-1">🌿</div>
+          <Leaf className="w-7 h-7 text-primary/50 mx-auto mb-1" />
           <div className="font-bold text-sm text-primary">Drop or paste recipe text</div>
           <div className="text-xs text-text-tertiary font-semibold mt-1">Ingredients, instructions & nutrition auto-extracted</div>
           <textarea
@@ -196,7 +196,7 @@ export default function RecipesTab({ recipes, onAddRecipe, onUpdateRecipe, onDel
       {/* Recipe List */}
       {recipes.length === 0 ? (
         <div className="text-center py-14 text-text-tertiary">
-          <div className="text-4xl mb-2 opacity-50">🌱</div>
+          <Sprout className="w-10 h-10 text-muted-foreground/50 mx-auto mb-2" />
           <p className="text-sm font-semibold">No recipes yet — add your first above</p>
         </div>
       ) : (
