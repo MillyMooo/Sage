@@ -2,10 +2,12 @@ import { useState } from 'react';
 import type { Recipe } from '@/types/recipe';
 import { parseRecipeText } from '@/lib/parseRecipe';
 import { showMessage } from './Toast';
+import RecipeDetailDialog from './RecipeDetailDialog';
 
 interface Props {
   recipes: Recipe[];
   onAddRecipe: (recipe: Omit<Recipe, 'id'>) => boolean;
+  onUpdateRecipe: (recipe: Recipe) => void;
   onDeleteRecipe: (id: number) => void;
   personNames: string[];
 }
