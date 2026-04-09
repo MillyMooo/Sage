@@ -8,9 +8,10 @@ interface Props {
   onAddMeal: (meal: Omit<Meal, 'id'>) => boolean;
   onDeleteMeal: (id: number) => void;
   onToggleComplete: (id: number) => void;
+  personNames: string[];
 }
 
-export default function MealPlanTab({ recipes, meals, onAddMeal, onDeleteMeal, onToggleComplete }: Props) {
+export default function MealPlanTab({ recipes, meals, onAddMeal, onDeleteMeal, onToggleComplete, personNames }: Props) {
   const [batchStart, setBatchStart] = useState('');
   const [batchEnd, setBatchEnd] = useState('');
   const [mealDate, setMealDate] = useState('');
@@ -86,7 +87,7 @@ export default function MealPlanTab({ recipes, meals, onAddMeal, onDeleteMeal, o
               <label className="block text-xs font-bold text-muted-foreground mb-1">Person *</label>
               <select value={person} onChange={e => setPerson(e.target.value)} className="w-full p-2.5 bg-input border border-border rounded-md text-sm font-medium min-h-[44px] appearance-none focus:outline-none focus:border-green-soft">
                 <option value="">Select person</option>
-                <option>Milly</option><option>Sergio</option><option>Both</option>
+                <option>{personNames[0]}</option><option>{personNames[1]}</option><option>Both</option>
               </select>
             </div>
           </div>
