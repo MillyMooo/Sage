@@ -25,6 +25,10 @@ export function useAppData() {
     return true;
   }, [data, save]);
 
+  const updateRecipe = useCallback((recipe: Recipe) => {
+    save({ ...data, recipes: data.recipes.map(r => r.id === recipe.id ? recipe : r) });
+  }, [data, save]);
+
   const deleteRecipe = useCallback((id: number) => {
     save({ ...data, recipes: data.recipes.filter(r => r.id !== id) });
   }, [data, save]);
@@ -56,5 +60,5 @@ export function useAppData() {
     URL.revokeObjectURL(url);
   }, [data]);
 
-  return { data, addRecipe, deleteRecipe, addMeal, deleteMeal, toggleMealComplete, exportData };
+  return { data, addRecipe, updateRecipe, deleteRecipe, addMeal, deleteMeal, toggleMealComplete, exportData };
 }
