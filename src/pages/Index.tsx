@@ -1,16 +1,39 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from 'react';
+import type { TabName } from '@/types/recipe';
+import { useAppData } from '@/hooks/useAppData';
+import AppSidebar from '@/components/AppSidebar';
+import RecipesTab from '@/components/RecipesTab';
+import MealPlanTab from '@/components/MealPlanTab';
+import CalendarTab from '@/components/CalendarTab';
+import ShoppingTab from '@/components/ShoppingTab';
+import CookGuideTab from '@/components/CookGuideTab';
+import Toast from '@/components/Toast';
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
+export default function Index() {
+  const [activeTab, setActiveTab] = useState<TabName>('recipes');
+  const { data, addRecipe, deleteRecipe, addMeal, deleteMeal, toggleMealComplete, exportData } = useAppData();
+
   return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
+    <div className="min-h-screen relative z-[1]">
+      <AppSidebar activeTab={activeTab} onTabChange={setActiveTab} onExport={exportData} />
+      <Toast />
+      <main className="md:ml-[230px] p-5 md:p-7 pb-20 md:pb-16 max-w-[1200px] relative z-[1]">
+        {activeTab === 'recipes' && (
+          <RecipesTab recipes={data.recipes} onAddRecipe={addRecipe} onDeleteRecipe={deleteRecipe} />
+        )}
+        {activeTab === 'plan' && (
+          <MealPlanTab recipes={data.recipes} meals={data.meals} onAddMeal={addMeal} onDeleteMeal={deleteMeal} onToggleComplete={toggleMealComplete} />
+        )}
+        {activeTab === 'calendar' && (
+          <CalendarTab meals={data.meals} onToggleComplete={toggleMealComplete} />
+        )}
+        {activeTab === 'shopping' && (
+          <ShoppingTab meals={data.meals} recipes={data.recipes} />
+        )}
+        {activeTab === 'cook' && (
+          <CookGuideTab meals={data.meals} recipes={data.recipes} />
+        )}
+      </main>
     </div>
   );
-};
-
-const Index = PlaceholderIndex;
-
-export default Index;
+}
