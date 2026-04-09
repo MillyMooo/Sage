@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Leaf, Sprout } from 'lucide-react';
 import type { Recipe } from '@/types/recipe';
 import { parseRecipeText } from '@/lib/parseRecipe';
 import { showMessage } from './Toast';
