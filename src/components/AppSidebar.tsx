@@ -1,5 +1,6 @@
 import { BookOpen, Calendar, CalendarDays, ShoppingCart, ChefHat } from 'lucide-react';
 import type { TabName } from '@/types/recipe';
+import sageLogo from '/sage-logo.png';
 
 const navItems: { tab: TabName; label: string; icon: React.ElementType }[] = [
   { tab: 'recipes', label: 'Recipes', icon: BookOpen },
